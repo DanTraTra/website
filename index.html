@@ -1,10 +1,126 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Hello there, Luke Patterson</h1>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<html lang="eng">-->
+<!--  <head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Cash Register</title>-->
+<!--    <link rel="stylesheet" href="styles.css">-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <h1>Cash Register</h1>-->
+<!--    <input id="cash"></input>-->
+<!--    <button id="purchase-btn">Purchase</button>-->
+<!--    <div id="price">Price: </div>-->
+<!--    <div id="change-due">Change Due: </div>-->
+<!--  <h3>Cash in Drawer</h3>-->
+<!--  <ul id="cash-in-drawer"></ul>-->
+
+<!--  </body>-->
+<!--  <script>-->
+<!--    let price = 1.87;-->
+<!--    let cid = [-->
+<!--      ["PENNY", 1.01],-->
+<!--      ["NICKEL", 2.05],-->
+<!--      ["DIME", 3.1],-->
+<!--      ["QUARTER", 4.25],-->
+<!--      ["ONE", 90],-->
+<!--      ["FIVE", 55],-->
+<!--      ["TEN", 20],-->
+<!--      ["TWENTY", 60],-->
+<!--      ["ONE HUNDRED", 100]-->
+<!--    ];-->
+
+<!--    const conversion = {-->
+<!--      "PENNY": 0.01,-->
+<!--      "NICKEL": 0.05,-->
+<!--      "DIME": 0.1,-->
+<!--      "QUARTER": 0.25,-->
+<!--      "ONE": 1,-->
+<!--      "FIVE": 5,-->
+<!--      "TEN": 10,-->
+<!--      "TWENTY": 20,-->
+<!--      "ONE HUNDRED": 100-->
+<!--    }-->
+
+<!--    const inputCash = document.getElementById('cash');-->
+
+<!--    const purchaseButton = document.getElementById('purchase-btn');-->
+
+<!--    const cid_list = document.getElementById('cash-in-drawer');-->
+
+<!--    const priceDiv = document.getElementById('price');-->
+
+<!--    const changeDueDiv = document.getElementById('change-due');-->
+
+<!--    const calc_total_cid = (cid_list) => cid_list.reduce((a, b) => a + b[1], 0);-->
+
+<!--    cid.forEach((coin)=>{-->
+<!--      cid_list.innerHTML += `<li>${coin[0]}: ${coin[1]}</li>`-->
+<!--    })-->
+
+<!--    priceDiv.textContent += ` $${1.87}`;-->
+
+<!--    const processChange = () => {-->
+<!--      console.log(calc_total_cid(cid))-->
+<!--      if (parseFloat(inputCash.value) === price) {-->
+<!--        changeDueDiv.textContent = "No change due - customer paid with exact cash"-->
+<!--      } else if (parseFloat(inputCash.value) <= price) {-->
+<!--        changeDueDiv.textContent = "Customer does not have enough money to purchase the item"-->
+
+<!--      } else if (calc_total_cid(cid) < parseFloat(inputCash.value) - price) {-->
+<!--        changeDueDiv.textContent = "Status: INSUFFICIENT_FUNDS"-->
+<!--      }-->
+<!--    }-->
+
+<!--    const calculateChange = (price, cid) => {-->
+<!--      change = {}-->
+<!--      while (price > 0) {-->
+<!--        calc_total_cid(cid)-->
+<!--        if (change) {-->
+
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--    purchaseButton.addEventListener("click", processChange);-->
+
+
+<!--  </script>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Hello there, Luke Patterson</h1>
-</body>
+<html>
+  <head>
+    <title>Custom Google Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAEa800yqko-01Ecfvxm_C22XktXIGifw&callback=initMap" async defer></script>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The map, centered at Uluru
+        const uluru = { lat: -25.344, lng: 131.036 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 4,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+          label: "Uluru",
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="map" style="height: 100%; width: 100%;"></div>
+  </body>
 </html>
