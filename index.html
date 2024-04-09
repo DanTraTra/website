@@ -1,29 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple Marker</title>
-    <!-- The callback parameter is required, so we use console.debug as a noop -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAEa800yqko-01Ecfvxm_C22XktXIGifw&callback=console.debug&libraries=maps,marker&v=beta">
+<head>
+    <title>Simple Marker with Nearby Places</title>
+    <!-- Include the Places library along with the Maps JavaScript API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAEa800yqko-01Ecfvxm_C22XktXIGifw&callback=initMap&libraries=places&v=beta">
     </script>
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      gmp-map {
+      /* Set the map height explicitly to define the size of the div element that contains the map. */
+      #map {
         height: 100%;
       }
 
-      /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
+      /* Makes the sample page fill the window. */
+      html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
     </style>
-  </head>
-  <body>
-    <gmp-map center="-36.850242614746094,174.76324462890625" zoom="14" map-id="b3f1d0bbd0b2d7b3">
-      <gmp-advanced-marker position="-36.850242614746094,174.76324462890625" title="My location"></gmp-advanced-marker>
-    </gmp-map>
-  </body>
+    <script>
+      function initMap() {
+        const center = { lat: -36.850242614746094, lng: 174.76324462890625 };
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 16,
+          center: center,
+          mapId: "b3f1d0bbd0b2d7b3" // Use your Map ID
+        });
+
+        // Use the Places Library to search for nearby places (e.g., restaurants)
+        const request = {
+          location: center,
+          radius: '500', // Search within 500 meters of the center
+          type: ['restaurant'], // Search for restaurants
+        };
+
+        const service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i], map);
+            }
+          }
+        });
+      }
+
+      function createMarker(place, map) {
+
+      const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path fill="#000000" stroke="#FFFF00" stroke-width="60" d="M479.788-84.924q-32.095 0-53.057-20.15-20.961-20.15-20.885-52.157h148.308q.076 32.307-21.097 52.307-21.174 20-53.269 20ZM330.001-202.617v-77.999h299.998v77.999H330.001Zm-12.847-123.384q-64.845-39.077-99.999-106.122Q182.001-499.168 182.001-576q0-124.422 86.788-211.211Q355.578-873.999 480-873.999q124.422 0 211.211 86.788Q777.999-700.422 777.999-576q0 76.832-35.154 143.877-35.154 67.045-99.999 106.122H317.154ZM342-404h276q38-31 60-76.175t22-95.525q0-92.627-64-156.464Q572-796 480-796t-156 63.836q-64 63.837-64 156.464 0 50.35 22 95.525Q304-435 342-404Zm138 0Z"/></svg>`;
+
+      // URL-encode the SVG
+      const encodedSvgIcon = encodeURIComponent(svgIcon);
+
+      // Use the encoded SVG as a Data URL
+      const markerIcon = {
+          url: `data:image/svg+xml;charset=UTF-8,${encodedSvgIcon}`,
+          scaledSize: new google.maps.Size(20, 20), // Scale the icon size as needed
+      };
+
+    const marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: markerIcon,
+        title: place.name,
+    });
+
+        google.maps.event.addListener(marker, 'click', () => {
+          const infowindow = new google.maps.InfoWindow({
+            content: '<div><strong>' + place.name + '</strong><br>' +
+              'Place ID: ' + place.place_id + '<br>' +
+              place.vicinity + '</div>'
+          });
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+</head>
+<body>
+    <div id="map"></div> <!-- The map container -->
+</body>
 </html>
