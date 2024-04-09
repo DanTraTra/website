@@ -74,9 +74,13 @@
         const infowindow = new google.maps.InfoWindow({
         content: '<div><strong>' + place.name + '</strong><br>' +
             place.vicinity + '<br>' +
-            'Daily Sales: $' + (Math.random() * (5000 - 100 + 1) + 100).toFixed(2) + '<br>' +
-            'Average Order Value: $' + (Math.random() * (50 - 10 + 1) + 10).toFixed(2) + '<br>' + '</div>'
-         });
+            // 'Daily Sales: $' + (Math.random() * (5000 - 100 + 1) + 100).toFixed(2) + '<br>' +
+            // 'Average Order Value: $' + (Math.random() * (50 - 10 + 1) + 10).toFixed(2) + '<br>' + '</div>'
+            '<strong>Daily Sales:</strong> $' + 'XX,XXX.XX' + '<br>' +
+            '<strong>Average Order Value:</strong> $' + 'XX.XX' + '<br>' + '</div>' +
+            '<strong>Customer Loyalty:</strong> %' + 'XX.XX' + '<br>' + '</div>'
+
+        });
 
         marker.addListener('click', () => {
           if (currentInfoWindow === infowindow && currentMarker === marker) {
