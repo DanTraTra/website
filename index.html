@@ -72,13 +72,14 @@
         });
 
         const infowindow = new google.maps.InfoWindow({
-        content: '<div><strong>' + place.name + '</strong><br>' +
+        content: '<div style="line-height: 22px"><strong style="font-size: 20px">' + place.name + '</strong><br>' +
             place.vicinity + '<br>' +
-            // 'Daily Sales: $' + (Math.random() * (5000 - 100 + 1) + 100).toFixed(2) + '<br>' +
-            // 'Average Order Value: $' + (Math.random() * (50 - 10 + 1) + 10).toFixed(2) + '<br>' + '</div>'
-            '<strong>Daily Sales:</strong> $' + 'XX,XXX.XX' + '<br>' +
-            '<strong>Average Order Value:</strong> $' + 'XX.XX' + '<br>' + '</div>' +
-            '<strong>Customer Loyalty:</strong> %' + 'XX.XX' + '<br>' + '</div>'
+            '<strong>Daily Sales: </strong> $' + (Math.random() * (5000 - 100 + 1) + 100).toFixed(2) + '<br>' +
+            '<strong>Average Order Value: </strong> $' + (Math.random() * (50 - 10 + 1) + 10).toFixed(2) + '<br>' + '</div>' +
+            '<strong>Customer Loyalty:</strong> ' + (Math.random() * (0.1) + 0).toFixed(4) + '%<br>' + '</div>'
+            // '<strong>Daily Sales:</strong> $' + 'XX,XXX.XX' + '<br>' +
+            // '<strong>Average Order Value:</strong> $' + 'XX.XX' + '<br>' + '</div>' +
+            // '<strong>Customer Loyalty:</strong> %' + 'XX.XX' + '<br>' + '</div>'
 
         });
 
@@ -105,4 +106,64 @@
 <body>
     <div id="map"></div> <!-- The map container -->
 </body>
-</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Simple Marker with Mapbox</title>-->
+<!--    &lt;!&ndash; Mapbox CSS &ndash;&gt;-->
+<!--    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">-->
+<!--    <style>-->
+<!--      #map {-->
+<!--        height: 100%;-->
+<!--      }-->
+<!--      html, body {-->
+<!--        height: 100%;-->
+<!--        margin: 0;-->
+<!--        padding: 0;-->
+<!--      }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div id="map"></div> &lt;!&ndash; The map container &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Mapbox JS &ndash;&gt;-->
+<!--    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>-->
+<!--    <script>-->
+<!--      mapboxgl.accessToken = 'pk.eyJ1IjoiZGFudHJhIiwiYSI6ImNsdXQ0a2VjYjA0cWwyanBrZm85Y2s5bWoifQ.bFKiuYWLbDNBRyi6-R7R5A'; // Replace with your access token-->
+<!--      const map = new mapboxgl.Map({-->
+<!--        container: 'map', // container id-->
+<!--        style: 'mapbox://styles/dantra/clut3zrv1001a01omcn3b05p4', // style URL-->
+<!--        center: [174.76324462890625, -36.850242614746094], // starting position [lng, lat]-->
+<!--        zoom: 16 // starting zoom-->
+<!--      });-->
+
+<!--      // An example place (this would be replaced by your actual data or API call)-->
+<!--      const place = {-->
+<!--        'type': 'Feature',-->
+<!--        'properties': {-->
+<!--          'description': `<strong>Place Name</strong><p>Place description here.</p>`,-->
+<!--          'icon': 'restaurant'-->
+<!--        },-->
+<!--        'geometry': {-->
+<!--          'type': 'Point',-->
+<!--          'coordinates': [174.76324462890625, -36.850242614746094]-->
+<!--        }-->
+<!--      };-->
+
+<!--      // Add markers to the map.-->
+<!--      for (const feature of [place]) { // Replace [place] with your places array-->
+<!--        // Create a HTML element for each feature-->
+<!--        const el = document.createElement('div');-->
+<!--        el.className = 'marker';-->
+
+<!--        // Make a marker for each feature and add it to the map-->
+<!--        new mapboxgl.Marker(el)-->
+<!--          .setLngLat(feature.geometry.coordinates)-->
+<!--          .setPopup(new mapboxgl.Popup({ offset: 25 }) // Add popups-->
+<!--            .setHTML(feature.properties.description))-->
+<!--          .addTo(map);-->
+<!--      }-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
