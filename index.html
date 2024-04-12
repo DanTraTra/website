@@ -21,7 +21,7 @@
     <script>
       async function initMap() {
         const { Map } = await google.maps.importLibrary("maps");
-        const center = { lat: -36.850242614746094, lng: 174.76324462890625 };
+        const center = { lat: -36.850242614747093, lng: 174.76324462890621 };
 
         const map = new Map(document.getElementById("map"), {
           zoom: 16,
@@ -32,7 +32,7 @@
         // Use the Places Library to search for nearby places (e.g., restaurants)
         const request = {
           location: center,
-          radius: '500', // Search within 500 meters of the center
+          radius: '600', // Search within 500 meters of the center
           type: ['restaurant'], // Search for restaurants
         };
 
